@@ -12,6 +12,7 @@ Future<User?> createAccount(String name, String email, String password) async {
             email: email, password: password))
         .user;
     if (user != null) {
+      user.updateProfile(displayName: name);
       await _firestore.collection('users').doc(_auth.currentUser?.uid).set({
         "name": name,
         "email": email,
